@@ -21,7 +21,7 @@ def extract_keywords(article):
 data['Keywords'] = data['Article'].apply(extract_keywords)
 
 # Define the keywords you want to include in the dropdown box
-selected_keywords = ['battle', 'election', 'athlete', 'fbi', 'law', 'animal', 'political', 'ai', 'religious', 'protestor','celebrity']
+selected_keywords = ['battle', 'election', 'athlete', 'fbi', 'law', 'animal', 'political', 'ai', 'religious', 'protester','celebrity']
 
 # Dropdown for keyword filtering
 selected_keyword = st.selectbox('Select Keyword:', ['All'] + sorted(selected_keywords))
