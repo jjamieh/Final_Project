@@ -17,10 +17,11 @@ data = pd.read_csv('fox_news_data.csv')
 first_letters = sorted(data['First Letter'].unique())  
 selected_first_letter = st.selectbox('Select First Letter:', ['All'] + list(first_letters))
 
-# Slider for article length
-min_length = int(data['Article'].apply(len).min())
-max_length = int(data['Article'].apply(len).max())
-article_length = st.slider('Article Length', min_value=min_length, max_value=max_length, value=min_length)
+# Checkbox for article length
+small_checkbox = st.checkbox("Small (<= 30,000 characters)")
+medium_checkbox = st.checkbox("Medium (30,000 - 60,000 characters)")
+large_checkbox = st.checkbox("Large (> 60,000 characters)")
+
 
 # Filter data based on selected first letter
 if selected_first_letter != 'All':
@@ -28,8 +29,14 @@ if selected_first_letter != 'All':
 else:
     filtered_data = data.copy()
 
-# Apply length filter after filtering by first letter
-filtered_data = filtered_data[filtered_data['Article'].apply(len) <= article_length]
+# Apply length filter based on checkboxes
+if small_checkbox:
+    filtered_data = filtered_data[filtered_data['Article'].apply(len) <= 30000]
+if medium_checkbox:
+    filtered_data = filtered_data[(filtered_data['Article'].apply(len) > 30000) & (filtered_data['Article'].apply(len) <= 60000)]
+if large_checkbox:
+    filtered_data = filtered_data[filtered_data['Article'].apply(len) > 60000]
+
 
 st.dataframe(filtered_data, hide_index=True, 
          column_config={"Article Link": st.column_config.LinkColumn(display_text="Link")})
