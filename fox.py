@@ -13,6 +13,13 @@ st.write("These are news articles that have been shared by Fox 40, telling stori
 
 data = pd.read_csv('fox_news_data.csv') 
 
+# Extract keywords from articles
+def extract_keywords(article):
+    keywords = re.findall(r'\b\w{5,}\b', article)  # Extract words with 5 or more characters
+    return keywords
+
+data['Keywords'] = data['Article'].apply(extract_keywords)
+
 # Define the keywords you want to include in the dropdown box
 selected_keywords = ['battle', 'election', 'athlete', 'FBI', 'law', 'animal', 'political', 'AI']
 
