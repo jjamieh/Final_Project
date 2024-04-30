@@ -18,9 +18,9 @@ first_letters = sorted(data['First Letter'].unique())
 selected_first_letter = st.selectbox('Select First Letter:', ['All'] + list(first_letters))
 
 # Checkbox for article length
-small_checkbox = st.checkbox("Small (<= 30,000 characters)")
-medium_checkbox = st.checkbox("Medium (30,000 - 60,000 characters)")
-large_checkbox = st.checkbox("Large (> 60,000 characters)")
+small_checkbox = st.checkbox("Small (<= 10,000 characters)")
+medium_checkbox = st.checkbox("Medium (10,000 - 40,000 characters)")
+large_checkbox = st.checkbox("Large (> 40,000 characters)")
 
 
 # Filter data based on selected first letter
