@@ -13,9 +13,11 @@ st.write("These are news articles that have been shared by Fox 40, telling stori
 
 data = pd.read_csv('fox_news_data.csv') 
 
-# Dropdown for first letter filtering
-first_letters = sorted(data['First Letter'].unique())  
-selected_first_letter = st.selectbox('Select First Letter:', ['All'] + list(first_letters))
+# Define the keywords you want to include in the dropdown box
+selected_keywords = ['battle', 'election', 'athlete', 'FBI', 'law', 'animal', 'political', 'AI']
+
+# Dropdown for keyword filtering
+selected_keyword = st.selectbox('Select Keyword:', ['All'] + sorted(selected_keywords))
 
 # Checkbox for article length
 small_checkbox = st.checkbox("Small (<= 10,000 characters)")
@@ -23,9 +25,9 @@ medium_checkbox = st.checkbox("Medium (10,000 - 40,000 characters)")
 large_checkbox = st.checkbox("Large (> 40,000 characters)")
 
 
-# Filter data based on selected first letter
-if selected_first_letter != 'All':
-    filtered_data = data[data['First Letter'] == selected_first_letter]
+# Filter data based on selected keyword
+if selected_keyword != 'All':
+    filtered_data = data[data['Keywords'].apply(lambda x: selected_keyword in x)]
 else:
     filtered_data = data.copy()
 
