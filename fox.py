@@ -31,11 +31,11 @@ else:
 
 # Apply length filter based on checkboxes
 if small_checkbox:
-    filtered_data = filtered_data[filtered_data['Article'].apply(len) <= 30000]
+    filtered_data = filtered_data[filtered_data['Article'].apply(len) <= 10000]
 if medium_checkbox:
-    filtered_data = filtered_data[(filtered_data['Article'].apply(len) > 30000) & (filtered_data['Article'].apply(len) <= 60000)]
+    filtered_data = filtered_data[(filtered_data['Article'].apply(len) > 10000) & (filtered_data['Article'].apply(len) <= 40000)]
 if large_checkbox:
-    filtered_data = filtered_data[filtered_data['Article'].apply(len) > 60000]
+    filtered_data = filtered_data[filtered_data['Article'].apply(len) > 40000]
 
 
 st.dataframe(filtered_data, hide_index=True, 
